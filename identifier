@@ -1,0 +1,92 @@
+-- Create the UI for toggling click detection and displaying the hierarchy
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.CoreGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Parent = screenGui
+mainFrame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+mainFrame.Size = UDim2.new(0, 400, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -100)
+mainFrame.Draggable = true
+mainFrame.Active = true
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Parent = mainFrame
+titleLabel.BackgroundTransparency = 1
+titleLabel.Size = UDim2.new(1, 0, 0, 20)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.Text = "Click Detector"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.TextSize = 18
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+
+local outputLabel = Instance.new("TextLabel")
+outputLabel.Parent = mainFrame
+outputLabel.Size = UDim2.new(1, 0, 0.8, 0)
+outputLabel.BackgroundTransparency = 1
+outputLabel.TextColor3 = Color3.new(1, 1, 1)
+outputLabel.TextSize = 14
+outputLabel.TextWrapped = true
+outputLabel.Text = "Click on an object to display its hierarchy."
+
+-- Toggle Button to turn click detection on/off
+local toggleButton = Instance.new("TextButton")
+toggleButton.Parent = mainFrame
+toggleButton.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+toggleButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+toggleButton.Position = UDim2.new(0.1, 0, 0.8, 0)
+toggleButton.Font = Enum.Font.SourceSans
+toggleButton.Text = "Start Listening (OFF)"
+toggleButton.TextColor3 = Color3.new(1, 1, 1)
+toggleButton.TextSize = 14
+
+-- Variables
+local listening = false
+local mouse = game.Players.LocalPlayer:GetMouse()  -- Correct reference to the mouse object
+
+-- Function to get the parent-child hierarchy of the clicked object
+local function getParentHierarchy(clickedObject)
+    local hierarchy = {}
+    
+    -- Traverse parent-child hierarchy and build it
+    local currentObject = clickedObject
+    while currentObject do
+        table.insert(hierarchy, 1, currentObject.Name)  -- Insert at the front to get top-to-bottom hierarchy
+        currentObject = currentObject.Parent
+    end
+    
+    -- Return hierarchy as a string
+    return table.concat(hierarchy, " -> ")  -- Join with "->"
+end
+
+-- Function that runs when the player clicks on something
+local function onClick()
+    local clickedObject = mouse.Target  -- Get the object clicked by the player
+    if clickedObject then
+        local hierarchy = getParentHierarchy(clickedObject)
+        
+        -- Output the hierarchy in the label and to the console
+        outputLabel.Text = "You clicked on: " .. hierarchy
+        print("You clicked on: " .. hierarchy)  -- Output to the dev console
+    end
+end
+
+-- Toggle function to start/stop listening for clicks
+local function toggleClickDetection()
+    listening = not listening
+    toggleButton.Text = listening and "Stop Listening (ON)" or "Start Listening (OFF)"
+    
+    if listening then
+        -- Start listening for clicks
+        mouse.Button1Down:Connect(onClick)
+    else
+        -- Stop listening for clicks
+        for _, connection in pairs(mouse.Button1Down:GetConnections()) do
+            connection:Disconnect()
+        end
+    end
+end
+
+-- Connect the toggle button
+toggleButton.MouseButton1Click:Connect(toggleClickDetection)
+
