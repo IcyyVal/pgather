@@ -1,0 +1,71 @@
+-- Create the main GUI elements
+local screenGui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local listButton = Instance.new("TextButton")
+local copyButton = Instance.new("TextButton")
+local output = Instance.new("TextLabel")
+
+-- Setup the main ScreenGui
+screenGui.Parent = game.CoreGui
+screenGui.Name = "ContentListerGui"
+
+-- Frame properties
+frame.Parent = screenGui
+frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.Active = true
+frame.Draggable = true
+
+-- List Button properties
+listButton.Parent = frame
+listButton.Text = "List Game Contents"
+listButton.Size = UDim2.new(0, 280, 0, 50)
+listButton.Position = UDim2.new(0, 10, 0, 10)
+
+-- Copy Button properties
+copyButton.Parent = frame
+copyButton.Text = "Copy to Clipboard"
+copyButton.Size = UDim2.new(0, 280, 0, 50)
+copyButton.Position = UDim2.new(0, 10, 0, 70)
+
+-- Output Label properties
+output.Parent = frame
+output.Size = UDim2.new(0, 280, 0, 50)
+output.Position = UDim2.new(0, 10, 0, 130)
+output.BackgroundColor3 = Color3.new(1, 1, 1)
+output.Text = ""
+output.TextWrapped = true
+
+-- Function to list all descendants of an instance recursively
+local function listDescendants(instance)
+    local contents = {}
+    local function recurse(inst, depth)
+        table.insert(contents, string.rep("  ", depth) .. inst.Name .. " [" .. inst.ClassName .. "]")
+        for _, child in ipairs(inst:GetChildren()) do
+            recurse(child, depth + 1)
+        end
+    end
+    recurse(instance, 0)
+    return table.concat(contents, "\n")
+end
+
+-- Assign functionality to list button
+listButton.MouseButton1Click:Connect(function()
+    output.Text = listDescendants(game)
+end)
+
+-- Function to copy text to the clipboard (using the Roblox setclipboard if available)
+local function copyToClipboard(text)
+    if setclipboard then
+        setclipboard(text)
+        output.Text = "Contents copied!"
+    else
+        output.Text = "Clipboard functionality not available."
+    end
+end
+
+-- Assign functionality to copy button
+copyButton.MouseButton1Click:Connect(function()
+    copyToClipboard(output.Text)
+end)
