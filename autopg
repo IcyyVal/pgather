@@ -1,113 +1,104 @@
--- Create UI for toggling teleportation, auto-clicker, and walking to breakables
-local screenGui = Instance.new("ScreenGui")
-local mainFrame = Instance.new("Frame")
-local titleLabel = Instance.new("TextLabel")
-local toggleTeleportButton = Instance.new("TextButton")  -- Changed this to teleporting toggler
-local autoClickStatusLabel = Instance.new("TextLabel")
-local toggleWalkToBreakablesButton = Instance.new("TextButton")
-local minimizeButton = Instance.new("TextButton")
+local _0x123 = Instance.new("ScreenGui")
+local _0x456 = Instance.new("Frame")
+local _0x789 = Instance.new("TextLabel")
+local _0x101 = Instance.new("TextButton")
+local _0x112 = Instance.new("TextLabel")
+local _0x131 = Instance.new("TextButton")
+local _0x141 = Instance.new("TextButton")
+local _0x151 = Instance.new("TextButton")
 
--- Configure UI
-screenGui.Name = "IcePGui"
-screenGui.Parent = game.CoreGui
+_0x123.Name = "IcePGui"
+_0x123.Parent = game.CoreGui
 
-mainFrame.Name = "MainFrame"
-mainFrame.Parent = screenGui
-mainFrame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
-mainFrame.BorderSizePixel = 2
-mainFrame.BorderColor3 = Color3.new(0.4, 0.4, 0.4)
-mainFrame.Size = UDim2.new(0, 300, 0, 140)
-mainFrame.Position = UDim2.new(0.5, -150, 0.5, -70)
-mainFrame.Draggable = true
-mainFrame.Active = true
+_0x456.Name = "MainFrame"
+_0x456.Parent = _0x123
+_0x456.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+_0x456.BorderSizePixel = 2
+_0x456.BorderColor3 = Color3.new(0.4, 0.4, 0.4)
+_0x456.Size = UDim2.new(0, 300, 0, 140)
+_0x456.Position = UDim2.new(0.5, -150, 0.5, -70)
+_0x456.Draggable = true
+_0x456.Active = true
 
-titleLabel.Name = "TitleLabel"
-titleLabel.Parent = mainFrame
-titleLabel.BackgroundTransparency = 1
-titleLabel.Size = UDim2.new(1, 0, 0, 20)
-titleLabel.Font = Enum.Font.SourceSansBold
-titleLabel.Text = "IcePGui"
-titleLabel.TextColor3 = Color3.new(1, 1, 1)
-titleLabel.TextSize = 18
-titleLabel.Position = UDim2.new(0, 0, 0, 0)
+_0x789.Name = "TitleLabel"
+_0x789.Parent = _0x456
+_0x789.BackgroundTransparency = 1
+_0x789.Size = UDim2.new(1, 0, 0, 20)
+_0x789.Font = Enum.Font.SourceSansBold
+_0x789.Text = "IcePGui"
+_0x789.TextColor3 = Color3.new(1, 1, 1)
+_0x789.TextSize = 18
+_0x789.Position = UDim2.new(0, 0, 0, 0)
 
--- Teleport Button (Replaces Auto-clicker button at top)
-toggleTeleportButton.Name = "ToggleTeleportButton"
-toggleTeleportButton.Parent = mainFrame
-toggleTeleportButton.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
-toggleTeleportButton.Position = UDim2.new(0.1, 0, 0.3, 0)
-toggleTeleportButton.Size = UDim2.new(0.8, 0, 0.2, 0)
-toggleTeleportButton.Font = Enum.Font.SourceSans
-toggleTeleportButton.Text = "Start Teleporting to Breakables (OFF)"
-toggleTeleportButton.TextColor3 = Color3.new(1, 1, 1)
-toggleTeleportButton.TextSize = 14
+_0x101.Name = "ToggleTeleportButton"
+_0x101.Parent = _0x456
+_0x101.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+_0x101.Position = UDim2.new(0.1, 0, 0.3, 0)
+_0x101.Size = UDim2.new(0.8, 0, 0.2, 0)
+_0x101.Font = Enum.Font.SourceSans
+_0x101.Text = "Start Teleporting to Breakables (OFF)"
+_0x101.TextColor3 = Color3.new(1, 1, 1)
+_0x101.TextSize = 14
 
--- Auto-Click Status Label (Shows whether AutoClick is on or off)
-autoClickStatusLabel.Name = "AutoClickStatusLabel"
-autoClickStatusLabel.Parent = mainFrame
-autoClickStatusLabel.BackgroundTransparency = 1
-autoClickStatusLabel.Position = UDim2.new(0.1, 0, 0.5, 0)
-autoClickStatusLabel.Size = UDim2.new(0.8, 0, 0.15, 0)
-autoClickStatusLabel.Font = Enum.Font.SourceSans
-autoClickStatusLabel.Text = "AutoClick | OFF (Press Shift+8 to toggle)"
-autoClickStatusLabel.TextColor3 = Color3.new(1, 1, 1)
-autoClickStatusLabel.TextSize = 14
+_0x112.Name = "AutoClickStatusLabel"
+_0x112.Parent = _0x456
+_0x112.BackgroundTransparency = 1
+_0x112.Position = UDim2.new(0.1, 0, 0.5, 0)
+_0x112.Size = UDim2.new(0.8, 0, 0.15, 0)
+_0x112.Font = Enum.Font.SourceSans
+_0x112.Text = "AutoClick | OFF (Press Shift+8 to toggle)"
+_0x112.TextColor3 = Color3.new(1, 1, 1)
+_0x112.TextSize = 14
 
--- Walk To Breakables Button
-toggleWalkToBreakablesButton.Name = "ToggleWalkToBreakablesButton"
-toggleWalkToBreakablesButton.Parent = mainFrame
-toggleWalkToBreakablesButton.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
-toggleWalkToBreakablesButton.Position = UDim2.new(0.1, 0, 0.7, 0)
-toggleWalkToBreakablesButton.Size = UDim2.new(0.8, 0, 0.2, 0)
-toggleWalkToBreakablesButton.Font = Enum.Font.SourceSans
-toggleWalkToBreakablesButton.Text = "Start Walking to Breakables (OFF)"
-toggleWalkToBreakablesButton.TextColor3 = Color3.new(1, 1, 1)
-toggleWalkToBreakablesButton.TextSize = 14
+_0x131.Name = "ToggleWalkToBreakablesButton"
+_0x131.Parent = _0x456
+_0x131.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+_0x131.Position = UDim2.new(0.1, 0, 0.7, 0)
+_0x131.Size = UDim2.new(0.8, 0, 0.2, 0)
+_0x131.Font = Enum.Font.SourceSans
+_0x131.Text = "Start Walking to Breakables (OFF)"
+_0x131.TextColor3 = Color3.new(1, 1, 1)
+_0x131.TextSize = 14
 
--- Minimize Button
-minimizeButton.Name = "MinimizeButton"
-minimizeButton.Parent = mainFrame
-minimizeButton.BackgroundColor3 = Color3.new(0.6, 0.6, 0.6)
-minimizeButton.Position = UDim2.new(0.9, -20, 0, 0)
-minimizeButton.Size = UDim2.new(0, 20, 0, 20)
-minimizeButton.Font = Enum.Font.SourceSansBold
-minimizeButton.Text = "-"
-minimizeButton.TextColor3 = Color3.new(1, 1, 1)
-minimizeButton.TextSize = 18
+_0x141.Name = "MinimizeButton"
+_0x141.Parent = _0x456
+_0x141.BackgroundColor3 = Color3.new(0.6, 0.6, 0.6)
+_0x141.Position = UDim2.new(0.9, -20, 0, 0)
+_0x141.Size = UDim2.new(0, 20, 0, 20)
+_0x141.Font = Enum.Font.SourceSansBold
+_0x141.Text = "-"
+_0x141.TextColor3 = Color3.new(1, 1, 1)
+_0x141.TextSize = 18
 
--- Variables
-local autoClicking = false
-local walkingToBreakables = false
-local teleporting = false
-local minimized = false
+local _0x161 = false
+local _0x171 = false
+local _0x181 = false
+local _0x191 = false
+local _0x201 = game.Players.LocalPlayer:GetMouse()
 
--- Function to find clickable breakable parts with ClickDetectors in the workspace
-local function findBreakables()
-    local breakables = {}
-    for _, obj in pairs(workspace:GetDescendants()) do
-        if obj:IsA("ClickDetector") and obj.Parent:IsA("BasePart") then
-            table.insert(breakables, obj.Parent)
-        elseif obj:IsA("ClickDetector") and obj.Parent:IsA("Model") then
-            table.insert(breakables, obj.Parent:FindFirstChildOfClass("BasePart") or obj.Parent.PrimaryPart)
+local function _0x211()
+    local _0x221 = {}
+    for _, _0x231 in pairs(workspace:GetDescendants()) do
+        if _0x231:IsA("ClickDetector") and _0x231.Parent:IsA("BasePart") then
+            table.insert(_0x221, _0x231.Parent)
+        elseif _0x231:IsA("ClickDetector") and _0x231.Parent:IsA("Model") then
+            table.insert(_0x221, _0x231.Parent:FindFirstChildOfClass("BasePart") or _0x231.Parent.PrimaryPart)
         end
     end
-    return breakables
+    return _0x221
 end
 
--- Function to teleport to breakables
-local function teleportToBreakables()
+local function _0x241()
     spawn(function()
-        while teleporting do
-            local breakables = findBreakables()
-            for _, breakable in ipairs(breakables) do
-                if not teleporting then break end
-                local player = game.Players.LocalPlayer
-                if player.Character and player.Character:FindFirstChild("HumanoidRootPart") and breakable then
-                    -- Teleport to the breakable part
-                    player.Character.HumanoidRootPart.CFrame = breakable.CFrame + Vector3.new(0, 5, 0) -- Position above it
-                    -- Wait until the breakable is broken before teleporting to the next one
-                    while breakable and breakable.Parent do
-                        wait(1) -- Wait before checking again if it's still not broken
+        while _0x181 do
+            local _0x251 = _0x211()
+            for _, _0x261 in ipairs(_0x251) do
+                if not _0x181 then break end
+                local _0x271 = game.Players.LocalPlayer
+                if _0x271.Character and _0x271.Character:FindFirstChild("HumanoidRootPart") and _0x261 then
+                    _0x271.Character.HumanoidRootPart.CFrame = _0x261.CFrame + Vector3.new(0, 5, 0)
+                    while _0x261 and _0x261.Parent do
+                        wait(1)
                     end
                 end
             end
@@ -115,36 +106,32 @@ local function teleportToBreakables()
     end)
 end
 
--- Function to make the player walk to breakables
-local function walkToBreakables()
+local function _0x271()
     spawn(function()
-        while walkingToBreakables do
-            local breakables = findBreakables()
-            local nearestBreakable = nil
-            local nearestDistance = math.huge
-            
-            -- Find the nearest breakable
-            for _, breakable in ipairs(breakables) do
-                local player = game.Players.LocalPlayer
-                if player.Character and breakable then
-                    local distance = (player.Character.HumanoidRootPart.Position - breakable.Position).Magnitude
-                    if distance < nearestDistance then
-                        nearestDistance = distance
-                        nearestBreakable = breakable
+        while _0x171 do
+            local _0x251 = _0x211()
+            local _0x281 = nil
+            local _0x291 = math.huge
+
+            for _, _0x261 in ipairs(_0x251) do
+                local _0x271 = game.Players.LocalPlayer
+                if _0x271.Character and _0x261 then
+                    local _0x301 = (_0x271.Character.HumanoidRootPart.Position - _0x261.Position).Magnitude
+                    if _0x301 < _0x291 then
+                        _0x291 = _0x301
+                        _0x281 = _0x261
                     end
                 end
             end
 
-            -- Move the player towards the nearest breakable
-            if nearestBreakable then
-                local player = game.Players.LocalPlayer
-                if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                    local humanoid = player.Character:FindFirstChild("Humanoid")
-                    if humanoid then
-                        humanoid:MoveTo(nearestBreakable.Position + Vector3.new(0, 5, 0)) -- Position above the clickable
-                        -- Stay at the breakable until it's broken
-                        while nearestBreakable and nearestBreakable.Parent do
-                            wait(1) -- Stay until the breakable is broken
+            if _0x281 then
+                local _0x271 = game.Players.LocalPlayer
+                if _0x271.Character and _0x271.Character:FindFirstChild("HumanoidRootPart") then
+                    local _0x311 = _0x271.Character:FindFirstChild("Humanoid")
+                    if _0x311 then
+                        _0x311:MoveTo(_0x281.Position + Vector3.new(0, 5, 0))
+                        while _0x281 and _0x281.Parent do
+                            wait(1)
                         end
                     end
                 end
@@ -153,37 +140,33 @@ local function walkToBreakables()
     end)
 end
 
--- Toggle Teleport Function
-local function toggleTeleport()
-    teleporting = not teleporting
-    toggleTeleportButton.Text = teleporting and "Stop Teleporting (ON)" or "Start Teleporting to Breakables (OFF)"
-    if teleporting then
-        teleportToBreakables()
+local function _0x321()
+    _0x181 = not _0x181
+    _0x101.Text = _0x181 and "Stop Teleporting (ON)" or "Start Teleporting to Breakables (OFF)"
+    if _0x181 then
+        _0x241()
     end
 end
 
--- Toggle Walk to Breakables Function
-local function toggleWalkToBreakables()
-    walkingToBreakables = not walkingToBreakables
-    toggleWalkToBreakablesButton.Text = walkingToBreakables and "Stop Walking to Breakables (ON)" or "Start Walking to Breakables (OFF)"
-    if walkingToBreakables then
-        walkToBreakables()
+local function _0x331()
+    _0x171 = not _0x171
+    _0x131.Text = _0x171 and "Stop Walking to Breakables (ON)" or "Start Walking to Breakables (OFF)"
+    if _0x171 then
+        _0x271()
     end
 end
 
--- Minimize/Maximize UI Function
-local function toggleMinimize()
-    minimized = not minimized
-    if minimized then
-        mainFrame.Size = UDim2.new(0, 300, 0, 20)
-        minimizeButton.Text = "+"
+local function _0x341()
+    _0x191 = not _0x191
+    if _0x191 then
+        _0x456.Size = UDim2.new(0, 300, 0, 20)
+        _0x141.Text = "+"
     else
-        mainFrame.Size = UDim2.new(0, 300, 0, 140)
-        minimizeButton.Text = "-"
+        _0x456.Size = UDim2.new(0, 300, 0, 140)
+        _0x141.Text = "-"
     end
 end
 
--- Connect UI Buttons
-toggleTeleportButton.MouseButton1Click:Connect(toggleTeleport)
-toggleWalkToBreakablesButton.MouseButton1Click:Connect(toggleWalkToBreakables)
-minimizeButton.MouseButton1Click:Connect(toggleMinimize)
+_0x101.MouseButton1Click:Connect(_0x321)
+_0x131.MouseButton1Click:Connect(_0x331)
+_0x141.MouseButton1Click:Connect(_0x341)
